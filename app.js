@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
 var port = 8080;
+var usr = 0;
 
 app.use(express.static('public'));
 
@@ -11,12 +12,14 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    console.log('a user connected');
+    usr++;
+    console.log('a users connected.',usr,'users connected');
     socket.on('draw',function(data){
         socket.broadcast.emit('draw',data);
     });
     socket.on('disconnect', function(){
-        console.log('a user disconnected');
+        usr--;
+        console.log('a user disconnected.',usr,'users connected');
     });
 });
 
