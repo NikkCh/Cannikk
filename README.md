@@ -1,3 +1,4 @@
-whiteboard
+Cannikk
 ==========
-a collaborative whiteboard app
+a collaborative canvas app.
+---------------------------
