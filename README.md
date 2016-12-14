@@ -11,15 +11,13 @@ Smartphone compatability will be added.
 Try it out at: www.cannikk.tk
 
 ## Installation
-
-Dependencies:
-
+Package dependencies:
 - node.js
 
-
-run this commands:
+To install this package run this commands in terminal:
 <pre><code>git clone https://github.com/NikkCh/Cannikk.git
 cd cannikk
+npm install
 node app.js</code></pre>
 
 At this point the server is up and running at port 8080.
