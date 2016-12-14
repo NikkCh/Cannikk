@@ -1,2 +1,3 @@
-# whiteboard
+whiteboard
+==========
 a collaborative whiteboard app
