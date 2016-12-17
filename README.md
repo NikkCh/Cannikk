@@ -1,12 +1,12 @@
 Cannikk
 ==========
-Cannikk is a collaborative canvas. The canvas will be projected on buildings,
+Cannikk is a multiuser drawing pad. The pad will be projected on buildings,
 so that passersby can change their surroundings.
 
 ## Usage
 
-The canvas can be manipulated by clicking and dragging the mouse.
-Smartphone compatability will be added.
+The pad can be manipulated by mouse if accessed on a desktop or by touch if
+accessed on smartphone.
 
 Try it out at: www.cannikk.tk
 
