@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(event){
+    var startMoveX = new Array();
+    var startMoveY = new Array();
     var socket = io.connect();
     socket.on('draw',function(data){
        outDraw(data);
@@ -8,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function(event){
     ctx = canvas.getContext("2d");
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
-    w = window.innerWidth;
-    h = window.innerHeight;
     var drawing = false;
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
         canvas.addEventListener('touchmove', function(e){
@@ -19,7 +19,15 @@ document.addEventListener('DOMContentLoaded', function(event){
             status.innerHTML = mouseX+" | "+mouseY;
             if(drawing) draw(e)
         }, false);
-        canvas.addEventListener("touchstart", function (e) {drawing = true;}, false);
+        canvas.addEventListener("touchstart", function (e) {
+            moveBol = true;
+            drawing = true;
+            startMoveX.pop();
+            startMoveY.pop();
+            startMoveX.push(Math.round(e.targetTouches[0].clientX));
+            startMoveY.push(Math.round(e.targetTouches[0].clientY));
+            ctx.moveTo(startMoveX[0], startMoveY[0]);
+        }, false);
         canvas.addEventListener("touchend", function (e) {drawing = false;}, false);
         canvas.addEventListener("mousecancel", function (e) {drawing = false;}, false);
     } else {
@@ -30,7 +38,16 @@ document.addEventListener('DOMContentLoaded', function(event){
         status.innerHTML = mouseX+" | "+mouseY;
         if(drawing) draw(e)
     }, false);
-    canvas.addEventListener("mousedown", function (e) {drawing = true;}, false);
+        canvas.addEventListener("mousedown", function (e) {
+            drawing = true;
+            moveBol = true;
+            startMoveX.pop();
+            startMoveY.pop();
+            startMoveX.push(e.clientX - ctx.canvas.offsetLeft);
+            startMoveY.push(e.clientY - ctx.canvas.offsetTop);
+            ctx.moveTo(startMoveX[0], startMoveY[0]);
+
+        }, false);
     canvas.addEventListener("mouseup", function (e) {drawing = false;}, false);
     canvas.addEventListener("mouseout", function (e) {drawing = false;}, false);
     }
@@ -45,11 +62,19 @@ document.addEventListener('DOMContentLoaded', function(event){
         ctx.strokeStyle = '#333333';
         ctx.lineTo(cX, cY);
         ctx.stroke();
-
-        socket.emit('draw',{x:cX,y:cY});
+        if (moveBol){
+            socket.emit('draw',{x:cX,y:cY, preX: startMoveX[0], preY: startMoveY[0]});
+            console.log(moveBol);
+            moveBol = false;
+        } else {
+            socket.emit('draw',{x:cX,y:cY});
+            console.log(moveBol);
+        }
     }
     function outDraw(e) {
+
         ctx.strokeStyle = '#333333';
+        ctx.moveTo(e.preX, e.preY);
         ctx.lineTo(e.x, e.y);
         ctx.stroke();
     }
