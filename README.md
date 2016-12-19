@@ -1,6 +1,6 @@
 Cannikk
 ==========
-Cannikk is a multiuser drawing pad. The pad will be projected on buildings,
+Cannikk is a multiuser drawing pad. In the future, after graphical improvements, the pad will be projected on buildings,
 so that passersby can change their surroundings.
 
 ## Usage
