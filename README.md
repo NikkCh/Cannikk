@@ -7,7 +7,6 @@ Cannikk is a multiuser drawing pad.
 The pad can be manipulated by mouse if accessed on a desktop or by touch if
 accessed on smartphone.
 
-Try it out at: www.cannikk.tk
 
 ## Installation
 Package dependencies:
