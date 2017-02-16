@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function(event){
     var startMoveX = new Array();
     var startMoveY = new Array();
     var socket = io.connect();
-    socket.on('draw',function(data){
-       outDraw(data);
+    socket.on('draw',function(drawData){
+       outDraw(drawData);
     });
 
     canvas = document.getElementById('myCanvas');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function(event){
             var mouseY = Math.round(e.targetTouches[0].clientY);
             var status = document.getElementById('status');
             status.innerHTML = mouseX+" | "+mouseY;
-            if(drawing) draw(e)
+            if(drawing) draw(e);
         }, false);
         canvas.addEventListener("touchstart", function (e) {
             moveBol = true;
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function(event){
         var mouseY = e.clientY - ctx.canvas.offsetTop;
         var status = document.getElementById('status');
         status.innerHTML = mouseX+" | "+mouseY;
-        if(drawing) draw(e)
+        if(drawing) draw(e);
     }, false);
         canvas.addEventListener("mousedown", function (e) {
             drawing = true;
@@ -64,11 +64,11 @@ document.addEventListener('DOMContentLoaded', function(event){
         ctx.stroke();
         if (moveBol){
             socket.emit('draw',{x:cX,y:cY, preX: startMoveX[0], preY: startMoveY[0]});
-            console.log(moveBol);
+            //console.log(moveBol);
             moveBol = false;
         } else {
             socket.emit('draw',{x:cX,y:cY});
-            console.log(moveBol);
+            //console.log(moveBol);
         }
     }
     function outDraw(e) {
