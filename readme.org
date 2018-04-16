@@ -1,0 +1,20 @@
+* Cannikk
+Cannikk is a multiuser drawing pad.
+** Usage
+The pad can be manipulated by mouse if accessed on a desktop or by touch if
+accessed on smartphone.
+** Instrallation
+Package dependencies:
+- node.js
+
+To install this package run  this commands in terinal:
+#+BEGIN_SRC sh
+  git clone https://github.com/NikkCh/Cannikk.git
+  npm install
+  node app.js
+#+END_SRC
+
+At this point the server is up and running at port 8080.
+You can access it at ~localhost:8080~.
+
+<|~_=|>
